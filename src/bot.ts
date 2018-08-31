@@ -3,7 +3,6 @@ import { RichEmbed } from 'discord.js'
 import * as path from 'path'
 import { IBot, IBotCommand, IBotConfig, ILogger } from './api'
 import { BotMessage } from './message'
-import { websiteBotService } from './websiteBotService'
 import * as fs from 'fs'
 
 const xp = require("../xp.json");
@@ -23,7 +22,6 @@ export class Bot implements IBot {
     private _logger!: ILogger;
     private _botId!: string;
     private _welcomeChannel!: discord.TextChannel;
-    private _websiteBotService!: websiteBotService;
 
     public start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string) {
         this._logger = logger
@@ -50,8 +48,6 @@ export class Bot implements IBot {
             this._client.user.setStatus('online')
             this._logger.info('started...')
             this._welcomeChannel = this._client.channels.get(this._config.welcomeChannel) as discord.TextChannel;
-            this._websiteBotService = new websiteBotService(this._client, this._config);
-            this._websiteBotService.startupService();
         })
 
         this._client.on('guildMemberAdd', async member => {
@@ -127,7 +123,7 @@ export class Bot implements IBot {
                         if (cmd.isValid(text)) {
                             const answer = new BotMessage(message.author);
                             if (!this._config.idiots || !this._config.idiots.includes(message.author.id)) {
-                                await cmd.process(text, answer, message, this._client, this._config, this._commands, this._websiteBotService)
+                                await cmd.process(text, answer, message, this._client, this._config, this._commands)
                             } else {
                                 if (this._config.idiotAnswer) {
                                     answer.setTextOnly(this._config.idiotAnswer)
