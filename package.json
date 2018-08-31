@@ -9,10 +9,10 @@
         "start": "node dist/index.js"
     },
     "keywords": [],
-    "author": "Nathan Farrer <email@email.com> (https://github.com/DapperDino) & Mick Rustenhoven <rustenhovenmick@outlook.com> (https://github.com/Mickie456)",
+    "author": "Double Driver <rustenhovenmick@outlook.com> (https://github.com/Double-Driver)",
     "repository": {
         "type": "git",
-        "url": "https://github.com/DapperDino/DiscordServerBot.git"
+        "url": "https://github.com/double-driver/bunq-discord-bot.git"
     },
     "license": "MIT",
     "devDependencies": {
